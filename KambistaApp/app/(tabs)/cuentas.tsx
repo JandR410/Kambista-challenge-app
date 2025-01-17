@@ -10,7 +10,7 @@ export default function Cuentas() {
   const [selectedValue, setSelectedValue] = useState<string>('Cuentas bancarias');
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#060F26", paddingTop: 18 }}> { }
+    <View style={{ flex: 1, backgroundColor: "#060F26", paddingTop: 18 }}>
       <View style={{ paddingVertical: 18, flexDirection: 'row' }}>
         <TouchableOpacity onPress={() => router.back()}>
           <FontAwesome6 name="chevron-left" size={24} color="white" style={{ marginLeft: 15 }} />
@@ -30,7 +30,7 @@ export default function Cuentas() {
       <View style={CommonStyles.container}>
         <View style={CommonStyles.contentContainer}>
           <Text style={{ marginStart: -30, marginTop: 34, fontFamily: 'Montserrat-BoldItalic', fontSize: 24, fontWeight: 'bold', marginBottom: 20, color: Colors.text, textAlign: 'center' }}>Cuentas</Text>
-          <View style={[CommonStyles.pickerContainer, {}]}>
+          <View style={[CommonStyles.pickerContainer]}>
             <Picker
               selectedValue={selectedValue}
               onValueChange={(itemValue) => setSelectedValue(itemValue)}
@@ -45,7 +45,7 @@ export default function Cuentas() {
           <TouchableOpacity
             style={CommonStyles.floatingButton}
             onPress={() => router.push('/screens/AgregarCuentas')}
-          
+
           >
             <FontAwesome6 name="plus" size={20} color="white" />
           </TouchableOpacity>

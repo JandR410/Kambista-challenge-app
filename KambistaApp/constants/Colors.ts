@@ -22,6 +22,7 @@ export default {
   white: '#FFFFFF',
   text: '#333333',
   gray: '#CCCCCC',
+  selectPicker: '#666666',
   lightGray: '#EEEEEE',
   gray2: '#686868',
   secondText: '#2D313D',

@@ -4,7 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 import { Ionicons } from '@expo/vector-icons';
 import CommonStyles from '../../styles/CommonStyles';
 import CustomButton from '../components/Button';
-import Input from '../components/Input';
+import { TextInputString, TextInputNumber } from '../components/Input';
 import Colors from '../../constants/Colors';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome';
 import { router } from 'expo-router';
@@ -14,15 +14,16 @@ export default function App() {
   const [selectedValueBanco, setSelectedValueBanco] = useState<string>('Ahorros');
   const [checkedTerms, setCheckedTerms] = useState(false);
   const [nombreCuenta, setNombreCuenta] = useState('');
-  const [numeroCuenta, setNumeroCuenta] = useState('');
+  const [numeroCuenta, setNumeroCuenta] = useState<number | undefined>();
   const [selectedOption, setSelectedOption] = useState<'soles' | 'dolares'>('soles');
+  var isButtonEnabled = false
 
   const openLink = (url: string) => {
     Linking.openURL(url);
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#060F26", paddingVertical: 18 }}> { }
+    <View style={{ flex: 1, backgroundColor: "#060F26", paddingVertical: 18 }}>
       <View style={{ paddingVertical: 18, flexDirection: 'row' }}>
         <TouchableOpacity onPress={() => router.back()}>
           <FontAwesome6 name="chevron-left" size={24} color="white" style={{ marginLeft: 15 }} />
@@ -116,10 +117,10 @@ export default function App() {
             </View>
 
             <Text style={{ fontSize: 14, fontWeight: 'bold', marginBottom: 10, color: Colors.gray2 }}>Número de Cuenta</Text>
-            <Input placeholder="Número celular" value={nombreCuenta} onChangeText={setNombreCuenta} keyboardType="phone-pad" />
+            <TextInputNumber placeholder="Escribe tu cuenta destino" value={numeroCuenta} onChangeText={setNumeroCuenta} />
 
             <Text style={{ fontSize: 14, fontWeight: 'bold', marginBottom: 10, color: Colors.gray2 }}>Ponle nombre a tu cuenta</Text>
-            <Input placeholder="Número celular" value={numeroCuenta} onChangeText={setNumeroCuenta} />
+            <TextInputString placeholder="Escribe un alias" value={nombreCuenta} onChangeText={setNombreCuenta} />
 
             <View style={{ flexDirection: 'column', marginTop: 20 }}>
               <View style={CommonStyles.checkboxContainer}>
@@ -133,8 +134,25 @@ export default function App() {
 
 
             </View>
+            {
+              isButtonEnabled = checkedTerms
+            }
+            <CustomButton
+              title="AGREGAR CUENTA"
+              onPress={() => {
+                router.navigate('/screens/DatosOperacion');
 
-            <CustomButton title="AGREGAR CUENTA" onPress={() => router.push('/screens/DatosOperacion')} style={{ marginTop: 20, width: '100%', borderRadius: 7, backgroundColor: '#00E3C2' }} textColor='#060F26' />
+              }}
+              style={{
+                marginTop: 20,
+                width: '90%',
+                borderRadius: 7,
+                backgroundColor: isButtonEnabled ? '#00E3C2' : '#00C896CC',
+              }}
+              textColor={isButtonEnabled ? Colors.secondary : '060F26'}
+              disabled={!isButtonEnabled}
+            />
+
           </ScrollView>
 
         </View>

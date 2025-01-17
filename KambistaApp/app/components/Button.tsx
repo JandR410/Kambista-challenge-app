@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ViewStyle, StyleProp, DimensionValue } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, StyleProp, ViewStyle, DimensionValue } from 'react-native';
 import CommonStyles from '../../styles/CommonStyles';
 
 interface CustomButtonProps {
@@ -7,10 +7,11 @@ interface CustomButtonProps {
     onPress: () => void;
     backgroundColor?: string;
     textColor?: string;
-    width?: DimensionValue; // Tipo DimensionValue
-    height?: DimensionValue; // Tipo DimensionValue
+    width?: DimensionValue;
+    height?: DimensionValue;
     borderRadius?: number;
-    style?: StyleProp<ViewStyle>; // Tipo StyleProp<ViewStyle>
+    style?: StyleProp<ViewStyle>;
+    disabled?: boolean;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -21,16 +22,18 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     width = 'auto',
     height = 'auto',
     borderRadius = 0,
-    style, 
+    style,
+    disabled = false,
 }) => {
     return (
         <TouchableOpacity
             style={[
                 CommonStyles.button,
-                { backgroundColor, width, height, borderRadius },
-                style, 
+                { backgroundColor, width, height, borderRadius, opacity: disabled ? 0.5 : 1 },
+                style,
             ]}
-            onPress={onPress}
+            onPress={disabled ? undefined : onPress}
+            disabled={disabled}
         >
             <Text style={[CommonStyles.buttonText, { color: textColor }]}>{title}</Text>
         </TouchableOpacity>
