@@ -1,18 +1,12 @@
-// App.tsx
+// app.tsx
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './screens/AgregarCuentas'; // Asegúrate de que la ruta sea correcta
-import { View, Text } from 'react-native';
+import { AuthProvider } from '../context/AuthContext';
+import Layout from '../app/_layout';
 
-const Tab = createBottomTabNavigator();
-
-const App = () => {
+export default function App() {
   return (
-      <View>
-        <Text>Tabs Layout</Text> {/* Contenido temporal */}
-      </View>
-    );
-};
-
-export default App;
+    <AuthProvider>
+      <Layout />
+    </AuthProvider>
+  );
+}

@@ -1,3 +1,4 @@
+import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome';
 import CommonStyles from '../../styles/CommonStyles';
@@ -5,14 +6,18 @@ import { router } from 'expo-router';
 import Colors from '../../constants/Colors';
 import CustomButton from '../components/Button';
 import Stepper from '../components/Stepper';
+import { AuthContext } from '../../context/AuthContext';
 
 
 export default function TranfiereKambista() {
 
+    const [currentStep, setCurrentStep] = useState(0);
+    const { cantidadEnviadaGlobal } = useContext(AuthContext);
+
     const steps = [
-        { label: 'Completa', active: true },
-        { label: 'Transfiere', active: false },
-        { label: 'Constancia', active: false },
+        { label: 'Completa', active: true, color: Colors.secondary, textColor: currentStep >= 0 ? Colors.secondary : 'gray', lineVisible: true, lineActive: 'white' },
+        { label: 'Transfiere', active: true, color: Colors.secondary, textColor: Colors.secondary },
+        { label: 'Confirma', active: currentStep >= 2, color: 'gray', textColor: 'gray' },
     ];
 
     return (
@@ -57,7 +62,7 @@ export default function TranfiereKambista() {
 
                                     <Text style={{ color: '#060F26', fontSize: 16, marginTop: 15 }}>Monto</Text>
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={{ fontWeight: 'bold', marginLeft: 10 }}>S/ 1,000.00</Text>
+                                        <Text style={{ fontWeight: 'bold', marginLeft: 10 }}>S/ {cantidadEnviadaGlobal?.toFixed(2)}</Text>
                                         <TouchableOpacity onPress={router.canDismiss}>
                                             <FontAwesome6 name="clone" size={18} color="black" style={{ marginLeft: 15 }} />
                                         </TouchableOpacity>

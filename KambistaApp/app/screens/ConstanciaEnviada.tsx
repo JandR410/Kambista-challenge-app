@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome';
 import CommonStyles from '../../styles/CommonStyles';
 import { router } from 'expo-router';
 import Colors from '../../constants/Colors';
 import CustomButton from '../components/Button';
-import Stepper from '../components/Stepper';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Constancia1() {
     const [codigo, setCodigo] = useState('');
-    const steps = [
-        { label: 'Completa', active: true },
-        { label: 'Transfiere', active: false },
-        { label: 'Constancia', active: false },
-    ];
-
+    const { cantidadRecividaGlobal } = useContext(AuthContext);
     const isButtonEnabled = codigo.length > 0;
 
     return (
@@ -37,7 +32,6 @@ export default function Constancia1() {
 
             <View style={CommonStyles.container}>
                 <View style={[CommonStyles.contentContainer, { paddingHorizontal: 0 }]}>
-                    <Stepper steps={steps} />
                     <ScrollView
                         contentContainerStyle={{ flexGrow: 1, backgroundColor: '#F6F6F9' }}
                         showsVerticalScrollIndicator={false}
@@ -75,7 +69,7 @@ export default function Constancia1() {
                                 <Text style={{ color: '#060F26', fontSize: 14, marginTop: 8 }}>*Usa tu código para dar seguimiento a tu operación.</Text>
 
                                 <Text style={{ color: '#686868', fontSize: 14, fontWeight: 'bold', marginTop: 8 }}>Monto a recibir</Text>
-                                <Text style={{ fontWeight: 'bold', marginLeft: 10 }}>S/ 343.00</Text>
+                                <Text style={{ fontWeight: 'bold', marginLeft: 10 }}>S/ {cantidadRecividaGlobal}</Text>
 
                                 <Text style={{ color: '#686868', fontSize: 14, fontWeight: 'bold', marginTop: 8 }}>Tiempo estimado de espera</Text>
                                 <Text style={{ fontWeight: 'bold', marginLeft: 10 }}>1 día útil</Text>
@@ -113,7 +107,7 @@ export default function Constancia1() {
                             disabled={!isButtonEnabled}
                         />
 
-                        <TouchableOpacity onPress={() => { }}>
+                        <TouchableOpacity onPress={() => router.push('/')}>
                             <Text style={[CommonStyles.timerText, { marginTop: 16, color: '#686868', fontSize: 16, marginHorizontal: 25, textDecorationLine: 'underline', fontWeight: 'bold' }]}>
                                 Volver al inicio
                             </Text>

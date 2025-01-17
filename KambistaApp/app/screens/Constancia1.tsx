@@ -6,22 +6,24 @@ import { router } from 'expo-router';
 import Colors from '../../constants/Colors';
 import CustomButton from '../components/Button';
 import Stepper from '../components/Stepper';
-import { TextInputString, TextInputNumber } from '../components/Input';
+import { TextInputNumber } from '../components/Input';
 
 export default function Constancia1() {
     const [codigo, setCodigo] = useState<number | undefined>();
-    const steps = [
-        { label: 'Completa', active: true },
-        { label: 'Transfiere', active: false },
-        { label: 'Constancia', active: false },
-    ];
-
+    const [currentStep, setCurrentStep] = useState(0);
     const isButtonEnabled = () => {
         if (codigo !== undefined) {
             return codigo > 0;
         }
         return false;
     };
+    const steps = [
+        { label: 'Completa', active: true, color: Colors.secondary, textColor: currentStep >= 0 ? Colors.secondary : 'gray', lineVisible: true },
+        { label: 'Transfiere', active: true, color: Colors.secondary, textColor: currentStep >= 0 ? Colors.secondary : 'gray', lineVisible: true },
+        { label: 'Confirma', active: isButtonEnabled(), color: 'gray', textColor: 'gray' },
+    ];
+
+
 
     return (
         <View style={{ flex: 1, backgroundColor: "#060F26", paddingVertical: 18 }}>

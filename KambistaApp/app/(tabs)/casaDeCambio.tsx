@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image, Alert, ActivityIndicator } from 'react-native';
 import CommonStyles from '../../styles/CommonStyles';
 import Colors from '../../constants/Colors';
@@ -7,6 +7,7 @@ import { router } from 'expo-router';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { TextInputNumber } from '../components/Input';
 import { simulateKambistaAPI } from '../../services/kambistaAPI';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function CasaDeCambio() {
     const [cantidad, setCantidad] = useState<number | undefined>(0);
@@ -18,7 +19,17 @@ export default function CasaDeCambio() {
     const [precioCompra, setPrecioCompra] = useState(3.321);
     const [precioVenta, setPrecioVenta] = useState(3.321);
     const [loading, setLoading] = useState(false);
-    const isButtonEnabled = false
+    const isButtonEnabled = false;
+    const { setCantidaEnviadadGlobal } = useContext(AuthContext);
+    const { setCantidaRecividadGlobal } = useContext(AuthContext);
+
+    const handleSetCantidadEnviada = (value: number | undefined) => {
+        setCantidaEnviadadGlobal(value);
+    };
+
+    const handleSetCantidadRecivida = (value: number | undefined) => {
+        setCantidaRecividadGlobal(value);
+    };
 
     useEffect(() => {
         const fetchInitialData = async () => {
@@ -59,6 +70,8 @@ export default function CasaDeCambio() {
                 setCantidadRecibida(parseFloat(data.cantidadRecibida));
                 setPrecioCompra(data.compra);
                 setPrecioVenta(data.venta);
+                handleSetCantidadEnviada(cantidad);
+                handleSetCantidadRecivida(parseFloat(data.cantidadRecibida));
                 router.push('/cuentas');
             } else {
                 Alert.alert("Error", "La operación no es válida.");

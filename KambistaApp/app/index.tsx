@@ -23,10 +23,8 @@ export default function App() {
         Linking.openURL(url);
     };
 
-
-
     return (
-        <View style={{ flex: 1, backgroundColor: "#060F26", paddingVertical: 18 }}> { }
+        <View style={{ flex: 1, backgroundColor: "#060F26", paddingVertical: 18 }}>
             <View style={{ paddingVertical: 18, flexDirection: 'row' }}>
                 <TouchableOpacity onPress={() => router.back()}>
                     <FontAwesome6 name="chevron-left" size={24} color="white" style={{ marginLeft: 15 }} />

@@ -69,7 +69,7 @@ const CommonStyles = StyleSheet.create({
         borderColor: Colors.gray,
         borderRadius: 10,
         marginBottom: 15,
-        padding: 2, 
+        padding: 2,
         overflow: 'hidden',
     },
     picker: {
@@ -113,7 +113,7 @@ const CommonStyles = StyleSheet.create({
     fullScreenContainer: {
         flex: 1, // Asegura que ocupe toda la pantalla
     },
-    
+
     botonCompra: {
         backgroundColor: Colors.compra,
         paddingVertical: 12,
@@ -139,59 +139,59 @@ const CommonStyles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 10,
         elevation: 5,
-        margin:'5%', 
-        shadowColor: '#000', 
+        margin: '5%',
+        shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 4,
-        width: '90%', 
-        maxWidth: 400, 
+        width: '90%',
+        maxWidth: 400,
     },
-    
+
     separator: {
-        height: 1, 
+        height: 1,
         backgroundColor: '#ccc',
         marginBottom: 20
-      },
-      iconContainerCard: {
-        position: 'absolute', 
-        backgroundColor: 'white', 
+    },
+    iconContainerCard: {
+        position: 'absolute',
+        backgroundColor: 'white',
         padding: 5,
-        marginTop:'20%',
-        marginLeft:'58%',
+        marginTop: '20%',
+        marginLeft: '58%',
         borderRadius: 50,
         elevation: 5,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 4,
-        zIndex:1
+        zIndex: 1
     },
 
     floatingButton: {
         position: 'absolute',
-        bottom: 20, 
-        right: 20, 
-        backgroundColor: Colors.secondary, 
-        borderRadius: 30, 
-        width: 40, 
-        height: 40, 
-        justifyContent: 'center', 
+        bottom: 20,
+        right: 20,
+        backgroundColor: Colors.secondary,
+        borderRadius: 30,
+        width: 40,
+        height: 40,
+        justifyContent: 'center',
         alignItems: 'center', // Centrar horizontalmente
         elevation: 5, // Sombra en Android
         shadowColor: '#000', // Sombra en iOS
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 2,
-      },
-      timerText: {
+    },
+    timerText: {
         textAlign: 'center',
         marginBottom: 12,
         fontSize: 15,
         color: 'gray'
-      },
+    },
 
-      cardText: {
+    cardText: {
         backgroundColor: 'white',
         borderRadius: 10,
         padding: 20,
@@ -210,67 +210,67 @@ const CommonStyles = StyleSheet.create({
     containerStepper: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between', 
-        paddingHorizontal: 20, 
-        marginVertical: 20, 
-      },
-      stepContainer: {
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+        marginVertical: 20,
+    },
+    stepContainer: {
         alignItems: 'center',
-        flex: 1, 
-      },
-      stepCircle: {
+        flex: 1,
+    },
+    stepCircle: {
         width: 12,
         height: 12,
         borderRadius: 6,
         borderWidth: 2,
-        borderColor: Colors.gray, 
+        borderColor: Colors.gray,
         backgroundColor: 'gray',
-      },
-      stepActive: {
-        backgroundColor: Colors.secondary, 
-        borderColor: Colors.secondary, 
-      },
-      stepLine: {
+    },
+    stepActive: {
+        backgroundColor: Colors.secondary,
+        borderColor: Colors.secondary,
+    },
+    stepLine: {
         flex: 1,
         height: 2,
-        backgroundColor: 'gray', 
-  
-      },
-      stepLabel: {
+        backgroundColor: 'gray',
+
+    },
+    stepLabel: {
         marginTop: 5,
         color: '#D9D9D9',
         fontSize: 12,
-      },
-      stepLabelActive: {
-        color: Colors.secondary, 
+    },
+    stepLabelActive: {
+        color: Colors.secondary,
         fontWeight: 'bold',
-      },
-      stepLineInner: {
-          flex: 1,
-          height: 1, 
-          backgroundColor: Colors.secondary, 
-        },
-        contentCircle: { 
-            flexDirection: 'row',
-            alignItems: 'center',
-        },
-        aa: {
-            flex: 1, 
-                height: 2,
-    backgroundColor: 'gray',
-              
-        },
-        loadingContainer: {
-            position: 'absolute', 
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-            opacity: 0.5, 
-            backgroundColor: 'white',
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
+    },
+    stepLineInner: {
+        flex: 1,
+        height: 1,
+        backgroundColor: Colors.secondary,
+    },
+    contentCircle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    aa: {
+        flex: 1,
+        height: 2,
+        backgroundColor: 'gray',
+
+    },
+    loadingContainer: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        opacity: 0.5,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
 
 export default CommonStyles;

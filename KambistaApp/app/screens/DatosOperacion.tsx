@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome';
 import CommonStyles from '../../styles/CommonStyles';
@@ -7,12 +7,15 @@ import Colors from '../../constants/Colors';
 import { Picker } from '@react-native-picker/picker';
 import CustomButton from '../components/Button';
 import Stepper from '../components/Stepper';
+import { AuthContext } from '../../context/AuthContext';
 
 
 export default function DatosOperacion() {
     const [selectedBancoEnvio, setSelectedBancoEnvio] = useState<string | null>(null);
     const [selectedCuentaRecibo, setSelectedCuentaRecibo] = useState<string | null>(null);
     const [selectedOrigenFondos, setSelectedOrigenFondos] = useState<string | null>(null);
+    const { cantidadEnviadaGlobal } = useContext(AuthContext);
+    const { cantidadRecividaGlobal } = useContext(AuthContext);
 
     const bancos = ['Selecciona', 'BCP', 'Interbank', 'BanBif', 'Otro'];
     const cuentas = ['Selecciona', 'Cuenta Corriente', 'Cuenta de Ahorros', 'Otro'];
@@ -43,11 +46,13 @@ export default function DatosOperacion() {
         const formattedSeconds = seconds.toString().padStart(2, '0');
         return `${formattedMinutes}:${formattedMinutes}:${formattedSeconds}`;
     };
+    const [currentStep, setCurrentStep] = useState(0);
+    const [lineStates, setLineStates] = useState([false, false]);
 
     const steps = [
-        { label: 'Completa', active: true },
-        { label: 'Transfiere', active: false },
-        { label: 'Constancia', active: false },
+        { label: 'Completa', active: currentStep >= 0, color: Colors.secondary, textColor: currentStep >= 0 ? Colors.secondary : 'gray', lineActive: lineStates[0] },
+        { label: 'Transfiere', active: currentStep >= 1, color: 'gray', textColor: 'gray' },
+        { label: 'Confirma', active: currentStep >= 2, color: 'gray', textColor: 'gray' },
     ];
 
     const handleBancoEnvioChange = (value: string | null) => {
@@ -89,11 +94,11 @@ export default function DatosOperacion() {
                             <View>
                                 <View style={CommonStyles.amountRow}>
                                     <Text style={{ color: '#060F26', fontSize: 16 }}>Tú envías</Text>
-                                    <Text style={{ fontWeight: 'bold' }}>$ 100.00</Text>
+                                    <Text style={{ fontWeight: 'bold' }}>$ {cantidadEnviadaGlobal?.toFixed(2)}</Text>
                                 </View>
                                 <View style={CommonStyles.amountRow}>
                                     <Text style={{ color: '#060F26', fontSize: 16 }}>Tú recibes</Text>
-                                    <Text style={{ fontWeight: 'bold' }}>S/343.00</Text>
+                                    <Text style={{ fontWeight: 'bold' }}>S/ {cantidadRecividaGlobal?.toFixed(2)}</Text>
                                 </View>
                                 <View style={CommonStyles.separator}></View>
                                 <Text style={{ fontWeight: 'bold', marginTop: -12, fontSize: 12 }}>Tipo de cambio utilizado <Text style={{ color: 'red', textDecorationLine: 'line-through' }}> 3.422 </Text>    3.433</Text>
