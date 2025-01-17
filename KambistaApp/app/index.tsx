@@ -23,6 +23,8 @@ export default function App() {
         Linking.openURL(url);
     };
 
+
+
     return (
         <View style={{ flex: 1, backgroundColor: "#060F26", paddingVertical: 18 }}>
             <View style={{ paddingVertical: 18, flexDirection: 'row' }}>
@@ -44,7 +46,7 @@ export default function App() {
             <View style={CommonStyles.container}>
                 <View style={CommonStyles.contentContainer}>
                     <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}> { }
-                        <Text style={{ fontFamily: 'Montserrat-BoldItalic', fontSize: 24, fontWeight: 'bold', marginBottom: 20, color: Colors.text, textAlign: 'center' }}>¡Empecemos!</Text>
+                        <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 20, color: Colors.text, textAlign: 'center' }}>¡Empecemos!</Text>
                         <Text style={{ fontSize: 16, marginBottom: 20, color: Colors.text, textAlign: 'center', marginHorizontal: 33 }}>Completa tus datos como figuran en tu DNI</Text>
 
                         <Text style={{ fontSize: 14, fontWeight: 'bold', marginBottom: 20, color: Colors.gray2 }}>Nombres Completos</Text>

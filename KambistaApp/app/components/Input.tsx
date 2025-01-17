@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { TextInput, StyleProp, TextStyle, KeyboardTypeOptions } from 'react-native';
+import { TextInput, StyleProp, TextStyle } from 'react-native';
 import Style from '../../styles/CommonStyles';
 
 interface TextInputStringProps {

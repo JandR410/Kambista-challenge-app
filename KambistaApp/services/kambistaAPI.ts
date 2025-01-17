@@ -8,53 +8,56 @@ interface SimulationResponse {
   compra: number;
   venta: number;
   cantidadRecibida: string;
-  result: boolean; 
+  result: boolean;
+  message?: string; 
 }
 
 export const simulateKambistaAPI = async (
-  cantidad: number = 0 ,
-  monedaOrigen: string,
-  monedaDestino: string,
-  tipoOperacion: string
+  cantidad: number = 0,
+  monedaOrigen: string = 'PEN',
+  monedaDestino: string = 'USD'
 ): Promise<SimulationResponse> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const precioCompraBase = 3.321;
-      const precioVentaBase = 3.400;
-      const variacion = (Math.random() - 0.5) * 0.1;
-      const precioCompraSimulado = precioCompraBase + variacion;
-      const precioVentaSimulado = precioVentaBase + variacion;
+  try {
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-      let cantidadRecibidaSimulada = 0;
-      let result = true; 
+    const response = await kambistaAPI.get<SimulationResponse>('/calculates', {
+      params: {
+        originCurrency: monedaOrigen,
+        destinationCurrency: monedaDestino,
+        amount: cantidad,
+        active: 'S',
+      },
+    });
 
-      if (tipoOperacion === 'compra') {
-        if (monedaOrigen === 'Dolares' && monedaDestino === 'Soles') {
-          cantidadRecibidaSimulada = cantidad * precioCompraSimulado;
-        } else if (monedaOrigen === 'Soles' && monedaDestino === 'Dolares') {
-          cantidadRecibidaSimulada = cantidad / precioCompraSimulado;
-        } else {
-          result = false; 
-        }
-      } else if (tipoOperacion === 'venta') {
-        if (monedaOrigen === 'Dolares' && monedaDestino === 'Soles') {
-          cantidadRecibidaSimulada = cantidad * precioVentaSimulado;
-        } else if (monedaOrigen === 'Soles' && monedaDestino === 'Dolares') {
-          cantidadRecibidaSimulada = cantidad / precioVentaSimulado;
-        } else {
-          result = false; 
-        }
-      } else {
-        result = false;
-      }
+    const data: SimulationResponse = {
+      compra: 0,
+      venta: 0,
+      cantidadRecibida: '',
+      result: true,
+    };
 
-      const data: SimulationResponse = { 
-        compra: precioCompraSimulado,
-        venta: precioVentaSimulado,
-        cantidadRecibida: cantidadRecibidaSimulada.toFixed(2),
-        result: result,
-      };
-      resolve(data);
-    }, 1000); 
-  });
+    return data;
+  } catch (error: any) {
+    console.error("Error al llamar a la API de Kambista:", error);
+
+    let errorMessage = "Error desconocido al contactar la API.";
+    if (error.response) {
+      errorMessage = `Error de la API: ${error.response.status} - ${error.response.data.message || 'Sin mensaje específico'}`;
+      console.error("Detalles del error:", error.response.data);
+    } else if (error.request) {
+      errorMessage = "No se recibió respuesta del servidor.";
+    } else {
+      errorMessage = error.message;
+    }
+
+    const errorData: SimulationResponse = {
+      compra: 0,
+      venta: 0,
+      cantidadRecibida: "0",
+      result: false,
+      message: errorMessage, 
+    };
+
+    return errorData;
+  }
 };

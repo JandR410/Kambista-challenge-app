@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect, ChangeEvent } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import CommonStyles from '../../styles/CommonStyles';
 import Colors from '../../constants/Colors';
 

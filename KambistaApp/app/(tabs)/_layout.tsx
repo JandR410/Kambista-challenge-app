@@ -3,10 +3,10 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs, useRouter } from 'expo-router';
 import { Pressable } from 'react-native';
 import { Image, StyleSheet, View } from 'react-native';
-import Colors from '@/constants/Colors';
-import Style from '@/styles/CommonStyles';
-import { useColorScheme } from '@/app/components/useColorScheme';
-import { useClientOnlyValue } from '@/app/components/useClientOnlyValue';
+import Colors from '../../constants/Colors';
+import Style from '../../styles/CommonStyles';
+import { useColorScheme } from '../components/useColorScheme';
+import { useClientOnlyValue } from '../components/useClientOnlyValue';
 
 function TabBarIcon(props: {
   name: 'inicio' | 'operaciones' | 'cuentas' | 'notificaciones' | 'perfil';
@@ -15,7 +15,7 @@ function TabBarIcon(props: {
   const getImageSource = (name: string) => {
     switch (name) {
       case 'inicio':
-        return require('../../assets/images/img1.jpeg'); 
+        return require('../../assets/images/img1.jpeg');
       case 'operaciones':
         return require('../../assets/images/img2.jpeg');
       case 'cuentas':
@@ -47,7 +47,7 @@ export default function TabLayout() {
   return (
 
 
-    
+
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
@@ -62,7 +62,7 @@ export default function TabLayout() {
           },
           headerShown: false,
           headerTitle: () => (
-            <View style={Style.headerLogoContainer}> {}
+            <View style={Style.headerLogoContainer}> { }
               <Image
                 source={require('../../assets/images/logo_top.jpeg')}
                 style={Style.headerLogo}
@@ -93,7 +93,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="cuentas"
         options={{
-          headerShown:false,
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="cuentas" color={color} />,
         }}
       />
@@ -112,6 +112,6 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
-    
+
   );
 }

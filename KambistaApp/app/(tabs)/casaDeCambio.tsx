@@ -34,9 +34,7 @@ export default function CasaDeCambio() {
     useEffect(() => {
         const fetchInitialData = async () => {
             if (cantidad !== undefined) {
-                const initialData = await simulateKambistaAPI(cantidad, 'Dolares', 'Soles', 'compra');
-                setPrecioCompra(initialData.compra);
-                setPrecioVenta(initialData.venta);
+                await simulateKambistaAPI(cantidad, 'PEN', 'USD');
                 calcularCambio();
             }
         };
@@ -56,7 +54,7 @@ export default function CasaDeCambio() {
 
     useEffect(() => {
         calcularCambio();
-    }, [cantidad, unidad, selectedOption, precioCompra, precioVenta]);
+    }, [cantidad, unidad, precioCompra, precioVenta]);
 
     const handleIconPress = () => {
         setUnidad(unidad === 'Dolares' ? 'Soles' : 'Dolares');
@@ -65,13 +63,11 @@ export default function CasaDeCambio() {
     const handleIniciarOperacion = async () => {
         setLoading(true);
         try {
-            const data = await simulateKambistaAPI(cantidad, unidad, unidad === 'Dolares' ? 'Soles' : 'Dolares', selectedOption);
+            const data = await simulateKambistaAPI(cantidad);
             if (data.result) {
                 setCantidadRecibida(parseFloat(data.cantidadRecibida));
-                setPrecioCompra(data.compra);
-                setPrecioVenta(data.venta);
                 handleSetCantidadEnviada(cantidad);
-                handleSetCantidadRecivida(parseFloat(data.cantidadRecibida));
+                handleSetCantidadRecivida(cantidadRecibida);
                 router.push('/cuentas');
             } else {
                 Alert.alert("Error", "La operación no es válida.");

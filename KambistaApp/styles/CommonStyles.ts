@@ -56,7 +56,6 @@ const CommonStyles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 8,
         alignItems: 'center',
-        width: '100%',
         alignSelf: 'center',
     },
     buttonText: {

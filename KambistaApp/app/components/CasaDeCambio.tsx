@@ -1,14 +1,14 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 
 interface CasaDeCambioProps {
-  
+
 }
 
 const CasaDeCambio: React.FC<CasaDeCambioProps> = () => {
   const [cantidadDolares, setCantidadDolares] = useState<string>('');
   const [cantidadSoles, setCantidadSoles] = useState<number>(0);
-  const [tipoCambio, setTipoCambio] = useState<number>(3.466); // Valor inicial del tipo de cambio
-  const [ahorroEstimado, setAhorroEstimado] = useState<number>(5.15); // Valor inicial del ahorro estimado
+  const [tipoCambio, setTipoCambio] = useState<number>(3.466);
+  const [ahorroEstimado, setAhorroEstimado] = useState<number>(5.15);
 
   const calcularCambio = () => {
     const cantidadDolaresNum = parseFloat(cantidadDolares);
@@ -25,7 +25,7 @@ const CasaDeCambio: React.FC<CasaDeCambioProps> = () => {
   }, [cantidadDolares, tipoCambio]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.replace(/[^0-9.]/g, ''); // Permite solo números y punto
+    const value = event.target.value.replace(/[^0-9.]/g, '');
     setCantidadDolares(value);
   };
 
